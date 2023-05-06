@@ -20,5 +20,5 @@ img_name = os.listdir(img_path)[0]
 img_file = f'{img_path}/{img_name}'
 
 # Test a single image and show the results
-result = inference_detector(model, img_path)
+result = inference_detector(model, img_file)
 model.show_result(img_file, result, out_file=f'{output_path}/output.png')
