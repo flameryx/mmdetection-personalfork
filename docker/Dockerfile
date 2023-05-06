@@ -22,6 +22,7 @@ RUN pip install --no-cache-dir mmcv-full==1.3.17 -f https://download.openmmlab.c
 
 # Install MMDetection
 RUN conda clean --all
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN git clone https://github.com/flameryx/mmdetection-personalfork.git /mmdetection
 WORKDIR /mmdetection
 ENV FORCE_CUDA="1"

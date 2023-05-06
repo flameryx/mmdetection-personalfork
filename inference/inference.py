@@ -3,7 +3,7 @@ import os
 
 # Paths
 work_path = '/mmdetection/inference'
-checkpoint_path = f'{work_path}/nn_checkpoint'
+checkpoint_path = f'{work_path}/nn-checkpoint'
 img_path = f'{work_path}/image'
 output_path = f'{work_path}/output'
 
