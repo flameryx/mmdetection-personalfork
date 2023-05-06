@@ -27,3 +27,5 @@ WORKDIR /mmdetection
 ENV FORCE_CUDA="1"
 RUN pip install --no-cache-dir -r requirements/build.txt
 RUN pip install --no-cache-dir -e .
+
+ENTRYPOINT ["python", "inference/inference.py"]
