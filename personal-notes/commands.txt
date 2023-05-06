@@ -1,0 +1,11 @@
+Run container:
+  docker run --gpus all --shm-size=8g -it \
+  -v C:\Users\rsosa\Desktop\Code_Windows\CV-Bench\nn-checkpoints\{trained-nn}:/mmdetection/checkpoints/{trained-nn} \
+  -v C:\Users\rsosa\Desktop\Code_Windows\CV-Bench\images\{image-name}:/mmdetection/images/{image-name} \
+  mmdetection
+
+Test Checkpoints:
+  faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
+
+Copy file from container to host machine:
+  docker cp {container-name}:{path-to-file-in-container} {destination-in-host} 
