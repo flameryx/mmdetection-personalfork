@@ -124,6 +124,7 @@ def main():
   result = inference_detector(model, img_file)
 
   output_file_name = f'{GetFileNameNoExtension(img_name)}_{GetFileNameNoExtension(config_file)}.png' 
+  print(output_file_name)
 
   model.show_result(img_file, result, out_file=f'{output_path}/{output_file_name}')
 
