@@ -1,6 +1,12 @@
 from mmdet.apis import init_detector, inference_detector
 import os
 
+def GetFileExtension(file_path):
+   return os.path.splitext(file_path)[1]
+
+def GetFileNameNoExtension(file_path):
+   return os.path.splitext(file_path)[0]
+
 # Version 1
 # Searches for all folders and files in /mmdetection/configs for a file that matches
 # the name of the checkpoint file, ensuring that the adecuate configuration is used
@@ -8,7 +14,7 @@ import os
 # Works if the checkpoint file has the exact same name as the confi file
 def GetConfigFile1(configs_path, nn_checkpoint_name):
   # Splits the file name in name and extension
-  nn_checkpoint_name = os.path.splitext(nn_checkpoint_name)[0]
+  nn_checkpoint_name = GetFileNameNoExtension(nn_checkpoint_name)
 
   match_path = ""
   found_match = False
@@ -42,8 +48,6 @@ def BuildPartialName(splitted_name, last_index):
   
   return builded_name
 
-
-
 # Version 2
 # Searches for all folders and files in /mmdetection/configs for a file that matches
 # the name of the checkpoint file, ensuring that the adecuate configuration is used
@@ -54,7 +58,7 @@ def BuildPartialName(splitted_name, last_index):
 # builded name. In some cases this may not be the correct configuration
 def GetConfigFile2(configs_path, nn_checkpoint_name):
   # Splits the file name in name and extension
-  nn_checkpoint_name = os.path.splitext(nn_checkpoint_name)[0]
+  nn_checkpoint_name = GetFileNameNoExtension(nn_checkpoint_name)
 
   splitted_checkpoint_name = nn_checkpoint_name.split('_')
 
@@ -90,7 +94,6 @@ def GetConfigFile2(configs_path, nn_checkpoint_name):
   
   return(last_match_path)
 
-
 def main():
   # Paths
   work_path = '/mmdetection/inference'
@@ -107,6 +110,8 @@ def main():
   config_file = GetConfigFile1(configs_path, nn_checkpoint_name)
   if not config_file:
     config_file = GetConfigFile2(configs_path, nn_checkpoint_name)
+  
+  print("Selected Config = " + config_file)
 
   # Build the model from a config file and a checkpoint file
   model = init_detector(config_file, checkpoint_file)
@@ -117,6 +122,9 @@ def main():
 
   # Test a single image and show the results
   result = inference_detector(model, img_file)
-  model.show_result(img_file, result, out_file=f'{output_path}/output.png')
+
+  output_file_name = f'{GetFileNameNoExtension(img_name)}_{GetFileNameNoExtension(config_file)}.png' 
+
+  model.show_result(img_file, result, out_file=f'{output_path}/{output_file_name}')
 
 main()
