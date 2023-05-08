@@ -5,7 +5,7 @@ def GetFileExtension(file_path):
    return os.path.splitext(file_path)[1]
 
 def GetFileNameNoExtension(file_path):
-   return os.path.splitext(file_path)[0]
+   return os.path.splitext(file_path)[0].split('/')[0]
 
 # Version 1
 # Searches for all folders and files in /mmdetection/configs for a file that matches
