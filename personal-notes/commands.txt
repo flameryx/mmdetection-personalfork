@@ -16,3 +16,6 @@ Testing Command:
 
 Copy file from container to host machine:
   docker cp {container-name}:{path-to-file-in-container} {destination-in-host} 
+
+Copy file from host machine to container:
+  docker cp {source-in-host} {container-name}:{path-to-file-in-container}
