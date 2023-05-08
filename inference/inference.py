@@ -3,6 +3,7 @@ import os
 
 # Paths
 work_path = '/mmdetection/inference'
+configs_path = '/mmdetection/configs'
 checkpoint_path = f'{work_path}/nn-checkpoint'
 img_path = f'{work_path}/image'
 output_path = f'{work_path}/output'
@@ -10,6 +11,26 @@ output_path = f'{work_path}/output'
 # Get the nn_checkpoint loaded as volume 
 nn_checkpoint_name = os.listdir(checkpoint_path)[0]
 checkpoint_file = f'{checkpoint_path}/{nn_checkpoint_name}'
+
+# Version 1: Checkpoint file has the exact same name as the config
+# Find the .config file that corresponds to the NN name given in the checkpoint
+# Iterate through all folders in configs
+
+# Removes the file extension from the checkpoint filename
+nn_checkpoint_name = os.path.splitext(nn_checkpoint_name).stem
+
+for folder in os.listdir(configs_path):
+    if os.path.isdir(f'{configs_path}/{folder}'):
+      for file_name in folder:
+         if nn_checkpoint_name in file_name:
+            print(f'{configs_path}/{folder}/{file_name}')
+        
+        
+  # Iterate through all files in each folder
+
+# Version 2: Checkpoint file has additional ID added after the NN name
+
+
 config_file = '/mmdetection/configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py'
 
 # Build the model from a config file and a checkpoint file
